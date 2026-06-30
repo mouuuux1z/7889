@@ -1,0 +1,20 @@
+{
+  "name": "mydoc",
+  "version": "1.0.0",
+  "private": true,
+  "description": "MYDoc - Medical Appointment Booking",
+  "scripts": {
+    "start": "concurrently -n backend,mobile,open -c blue,green,magenta \"npm run dev --prefix backend\" \"npm run web --prefix mobile\" \"node scripts/open-web.js\"",
+    "start:clean": "powershell -ExecutionPolicy Bypass -File scripts/kill-ports.ps1 && npm start",
+    "mobile": "npm run start --prefix mobile",
+    "web": "npm run web --prefix mobile",
+    "backend": "npm run dev --prefix backend",
+    "db:seed": "npm run db:seed --prefix backend",
+    "db:setup": "npm run db:generate --prefix backend && npm run db:push --prefix backend && npm run db:seed --prefix backend",
+    "db:up": "docker compose up -d",
+    "db:push": "npm run db:push --prefix backend"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
